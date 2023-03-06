@@ -1,5 +1,7 @@
 package com.ll;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -13,6 +15,7 @@ public class App {
         System.out.println("== 명언 앱 ==");
 
         long lastWiseSayingId = 0;
+        List<WiseSaying> wiseSayings = new ArrayList<>();
 
         while (true) {
             System.out.print("명령) ");
@@ -33,7 +36,19 @@ public class App {
 
                     long id = ++lastWiseSayingId;
 
+                    WiseSaying wiseSaying = new WiseSaying(id, content, authorName);
+                    wiseSayings.add(wiseSaying);
+
                     System.out.printf("%d번 명언이 등록되었습니다.\n", id);
+                    break;
+                case "목록":
+                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("-".repeat(30));
+
+                    for(int i=wiseSayings.size()-1; i>=0; i--){
+                        WiseSaying ws = wiseSayings.get(i);
+                        System.out.printf("%d / %s / %s\n", ws.getId(), ws.getAuthorName(), ws.getContent());
+                    }
                     break;
                 default:
                     System.out.printf("`%s`(은)는 올바르지 않은 명령입니다.\n", cmd);

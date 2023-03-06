@@ -95,4 +95,21 @@ public class AppTests {
                 .doesNotContain("4번 명언이 등록되었습니다.");
     }
     // 앱 테스트 끝
+
+    @Test
+    @DisplayName("등록된 명언의 목록을 출력한다.")
+    public void t7() {
+        String rs = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                목록
+                """);
+
+        assertThat(rs)
+                .contains("1번 명언이 등록되었습니다.")
+                .contains("번호 / 작가 / 명언")
+                .contains("-".repeat(30))
+                .contains("1 / 작자미상 / 현재를 사랑하라.");
+    }
 }
